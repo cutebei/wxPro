@@ -41,7 +41,7 @@
       },
       {
         "pagePath": "pages/cart/cart",
-        "text": "购物车",
+        "text": "交易",
         "iconPath": "icon/cart-1.png",
         "selectedIconPath": "icon/cart-2.png"
       },
