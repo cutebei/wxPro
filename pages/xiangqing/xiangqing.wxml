@@ -1,0 +1,111 @@
+<!--pages/xiangqing/xiangqing.wxml-->
+<view class='box'>
+  <view class="page">
+    <view class="navbar">
+      <block wx:for="{{tabs}}" wx:key="index">
+        <view id="{{index}}" class="navbar__item {{activeIndex == index ? 'navbar__item_on' : ''}}" bindtap="navTabClick">
+          <view class="navbar__title">{{item.name}}</view>
+        </view>
+      </block>
+      <view class="navbar__slider" style="width: {{sliderWidth}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+    </view>
+    <view style="position: absolute;top: 68rpx;width: 100%;height:{{contentHeight}}px">
+      <swiper current="{{activeIndex}}" duration="300" bindchange="bindChange">
+        <!-- 商品 -->
+        <swiper-item>
+          <view class='item_1'>
+            <!-- 轮播 -->
+            <view class='s_swiper'>
+              <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
+                <block wx:for="{{movies}}" wx:for-index="index" wx:key="index">
+                  <swiper-item>
+                    <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
+                  </swiper-item>
+                </block>
+              </swiper>
+            </view>
+            <view class='jianjie' wx:for='{{s_info}}' wx:key="index">
+              <view class='jie'>{{item.proice}}</view>
+              <view class='stor'>￥{{item.money}}</view>
+            </view>
+            <view class='xuan'>
+              <text>已选</text>
+              <text>【 {{ chanpin }} 】</text>
+              <text class='num'>{{shu}}个</text>
+            </view>
+            <view class='canpin'>
+              <view style='color:#999;'>产品</view>
+              <view class='wei'>
+                <view wx:for='{{s_wei}}' bindtap="xuanze" data-cnvin="{{item.price}}" wx:key="index">【{{item.price}}】</view>
+              </view>
+            </view>
+            <view class='s_num'>
+              <view class='s_shu'>数量</view>
+              <view class='jia'>-</view>
+              <view class='jia'>1</view>
+              <view class='jia'>+</view>
+            </view>
+            <view class='dizhi'>
+              <view>配送至</view>
+              <view>{{dizhi}}</view>
+            </view>
+            <view class='pingjia'>
+              <view>
+                <text class='siz'>评价</text>
+                <text>好评98%</text>
+              </view>
+              <view>
+                <text>共8.6万+评论</text>
+              </view>
+            </view>
+            <view>
+              <!-- 评价选项卡 -->
+              <view style='background:#fff'>
+                <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+                  <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">好评</view>
+                  <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">中评</view>
+                  <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">差评</view>
+                  <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">晒单</view>
+                </scroll-view>
+                <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+                  <swiper-item wx:for="{{[0,1,2,3,4,5,6,7]}}" class='s_color' wx:key="index">
+                    <scroll-view scroll-y="true" class="scoll-h">
+                      <block wx:for="{{[1]}}" wx:key="index">
+                          21331
+                      </block>
+                    </scroll-view>
+                  </swiper-item>
+                </swiper>
+                 <view class='quan'>
+                  查看全部评价
+                </view>
+              </view>
+             <!-- 查看全部评价 -->
+              <view class='chakan'>
+                <image src=''></image>
+                <image src=''></image>
+              </view>
+            </view>
+          </view>
+        </swiper-item>
+        <swiper-item>
+          <view>评价</view>
+        </swiper-item>
+        <swiper-item>
+          <view>详情</view>
+        </swiper-item>
+        <swiper-item>
+          <view>推荐</view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+
+  <!-- footer -->
+  <view class='footer'>
+    <view class='lianxi'>联系客服</view>
+    <view class='lianxi'>购物车</view>
+    <view class='gouwu' style='background:rgb(250, 139, 12);' bindtap="goOrder">加入购物车</view>
+    <view class='gouwu'style='background:#e90000;'>立即购买</view>
+  </view>
+</view>

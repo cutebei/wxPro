@@ -43,19 +43,19 @@ Page({
     ],
     events: [
       {
-        img: "../../icon/home-2.png", name: "拼团"
+        img: "../../icon/pt.png", name: "拼团",url:"../sellGroup/sellGroup"
       },
       {
-        img: "../../icon/home-2.png", name: "抽奖",
+        img: "../../icon/cj.png", name: "抽奖", url: "../sellGroup/sellGroup"
       },
       {
-        img: "../../icon/home-2.png", name: "抢购",
+        img: "../../icon/qg.png", name: "抢购", url: "../secKill/secKill"
       },
       {
-        img: "../../icon/home-2.png", name: "优惠券",
+        img: "../../icon/yh.png", name: "优惠券", url: "../sellGroup/sellGroup"
       },
       {
-        img: "../../icon/home-2.png", name: "在线预订",
+        img: "../../icon/yd.png", name: "在线预订", url: "../sellGroup/sellGroup"
       }
     ],
     ptArr: [
@@ -109,6 +109,17 @@ Page({
     }
     wx.switchTab({ url: '../cake/cake' });
   },
+  goToptPage:function (e){ //跳转到拼团页面
+
+    wx.navigateTo({ url: '/pages/sellGroup/sellGroup' });
+  },
+  goTojgPage:function(e){
+    wx.navigateTo({ url: '/pages/secKill/secKill' });
+  },
+  gotPage:function(e){
+    var url = e.currentTarget.dataset.url;
+    wx.navigateTo({ url: url });
+  },
   goDetail: function (e) {
     var nm = e.currentTarget.dataset.pname;
     var b = e.currentTarget.dataset.brand;
@@ -135,6 +146,11 @@ Page({
     //wx.navigateTo({
     //url: '../socket/socket'
     //})
+  },
+  s_rou: function (e) {
+    wx.navigateTo({
+      url: '../xiangqing/xiangqing'
+    })
   },
   onLoad: function () {
     var that = this

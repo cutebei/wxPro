@@ -5,7 +5,8 @@
 </picker>-->
 <!-- banner -->
 <!-- 轮播-->
-<view>
+<view style='position:relative'>
+  <input placeholder="请输入关键字" class='searchIpu'></input>
   <swiper class="swiper_box" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
     <block wx:for="{{imgUrls}}" wx:key="index">
       <swiper-item>
@@ -16,33 +17,38 @@
 </view>
 <!-- 引导活动 -->
 <view class='events_con'>
-  <dl wx:for="{{events}}" wx:key="index">
-    <dt>
-      <image src="{{item.img}}" class='events_img' />
+<block wx:for="{{events}}"   wx:for-index="idx" wx:for-item="itemName" wx:key="index">
+ <dl>
+  <view data-url="{{itemName.url}}" catchtouchstart='gotPage'>
+      <dt>
+      <image src="{{itemName.img}}" class='events_img' />
     </dt>
-    <dd>{{item.name}}</dd>
+    <dd>{{itemName.name}}</dd>
+  </view>
   </dl>
+</block>
+ 
 </view>
 <!-- 拼团-->
 <view class='active_box'>
-  <text class='active_title'>xxx拼团<text class='active_span'>大家都在拼</text></text>
+  <view class='active_title'>xxx拼团<view class='active_span' bindtap='goToptPage'>大家都在拼</view></view>
   <view class='active_dl' style='margin-bottom:10rpx;'>
     <dl wx:for="{{ptArr}}" class="pt_box" wx:key="index">
       <dt style="display:block">
         <image src="{{item.img}}" class='active_img' />
       </dt>
       <dd>
-        <text style='font-size:20rpx;border:1rpx solid #999999;display:inline-block;border-radius:4px;float:left;margin-left:35rpx;margin-top:7rpx;'>{{item.num}}人拼</text>
-        <text style='color:#cccccc; text-decoration:line-through;'>￥{{item.naturl}}</text>
+        <text style='font-size:20rpx;border:1rpx solid #e1e1e1;display:inline-block;border-radius:4px;float:left;margin-left:35rpx;margin-top:7rpx;padding:0rpx 10rpx;'>{{item.num}}人拼</text>
+        <text style='color:#cccccc;font-size:24rpx; text-decoration:line-through;'>￥{{item.naturl}}</text>
         <text style='color:red;font-weight:800;float:right;margin-right:45rpx;'>￥{{item.cheap}}</text>
       </dd>
     </dl>
   </view>
   <!-- 抢购-->
-  <text class='active_title'>xxx抢购<text class='active_span'>还有场</text></text>
-  <view class='qg_dl' style='display:flex;'>
+  <view class='active_title'>xxx抢购<view class='active_span'  bindtap='goTojgPage'>还有场</view></view>
+  <view class='qg_dl' style='display:flex; padding-bottom:10rpx;'>
     <view wx:for="{{jgArrLeft}}" class="qg_box" wx:key="index" style='flex:1'>
-      <view style="display:block;border:1px solid #cccccc;width:90%;margin:0 auto;height:100%;">
+      <view style="display:block;border:1px solid #e1e1e1;width:90%;margin:0 auto;height:100%;">
         <text style='font-size:28rpx;color:#cccccc;display:block;padding:10rpx 0;margin-left:5rpx;'>{{item.name}}<text class='qgSpan' >{{item.hour}}</text>
         <text class='qgSpan'>{{item.min}}</text>
         <text class='qgSpan'>{{item.sec}}</text></text>
@@ -52,7 +58,7 @@
 
     </view>
     <view wx:for="{{jgArrRight}}" class="qg_box" wx:key="index" style='flex:1;'>
-      <view style="display:block;border:1px solid #cccccc;;width:90%;margin:0 auto;height:100%;">
+      <view style="display:block;border:1px solid #e1e1e1;;width:90%;margin:0 auto;height:100%;">
         <text style='font-size:28rpx;font-weight:800;display:block;padding-left:5rpx;margin:5rpx 0;'>{{item.title}}</text>
         <text style='font-size:24rpx;color:#cccccc;display:block;padding-left:5rpx;'>{{item.con}}</text>
         <view class='qgright'>
@@ -66,9 +72,9 @@
 </view>
 <!-- 种草-->
 <view class='s_box'>
-  <view class='s_tit'>XXX 种草</view>
+  <view class='s_tit' style='font-size:36rpx;'>XXX 种草</view>
   <view class='s_con'>
-    <view class='s_cons' wx:for='{{s_info}}'>
+    <view class='s_cons' wx:for='{{s_info}}'  wx:key="index" bindtap='s_rou'>
       <image src='{{item.src}}'></image>
       <view class='s_text'>
         <text class='s_money'>￥{{item.money}}</text>

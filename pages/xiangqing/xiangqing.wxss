@@ -1,0 +1,221 @@
+/* pages/xiangqing/xiangqing.wxss */
+/* tab */
+view , page {
+  padding: 0px;
+  margin: 0px;
+}
+
+.page {
+  height: 100%;
+}
+
+.navbar {
+    display: flex;
+    position: absolute;
+    z-index: 500;
+    top: 0;
+    width: 100%;
+}
+
+.navbar__item {
+    position: relative;
+    display: block;
+    flex: 1;
+    padding: 10rpx 0;
+    text-align: center;
+    font-size: 0;
+    height: 48rpx;
+    line-height: 48rpx;
+    /* <!-- NavBar的总高度为：height + padding-top + padding-bottom = 68rpx --> */
+}
+
+.navbar__item_on {
+    color: #e90000;
+}
+
+.navbar__slider {
+    position: absolute;
+    display: block;
+    content: " ";
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    background-color: #e90000;
+    transition: transform .3s;
+}
+
+.navbar__title{
+    display: inline-block;
+    font-size: 27rpx;
+    max-width: 8em;
+    text-align: center;
+    /* margin: 10rpx 0; */
+}
+
+swiper {
+  height: 100%;
+}
+
+swiper-item{
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  /* padding-top: 20rpx; */
+  /* text-align: center; */
+}
+.item_1{
+  background: #dedede
+}
+/* 轮播 */
+.s_swiper{
+  border-bottom: 1rpx solid #999;
+  background: #fff;
+}
+.s_swiper>.swiper {
+  height: 400rpx;
+  width: 100%;
+}
+.s_swiper>.swiper image {
+  height: 100%;
+  width: 100%;
+}
+/* 简介 */
+.jianjie{
+  background: #fff;
+  padding: 10rpx 20rpx;
+  color: #666;
+  font-size: 30rpx;
+  margin-bottom: 30rpx;
+}
+.stor{
+    color: #e90000;
+    font-size: 35rpx;
+    margin: 15rpx 0;
+}
+.xuan{
+  background: #fff;
+  padding: 20rpx 15rpx;
+  border-bottom: 1rpx solid #ccc;
+  font-size: 30rpx;
+  color: #333;
+}
+.num{
+  float: right;
+}
+.canpin{
+  background: #fff;
+  padding: 20rpx 15rpx;
+  font-size: 30rpx;
+  color: #666;
+  display: flex;
+}
+.wei>view{
+  margin: 10rpx 10rpx;
+  padding: 0 30rpx;
+  background: #e90000;
+  color: #fff;
+}
+.s_num{
+  font-size: 30rpx;
+  color: #333;
+  display: flex;
+  background: #fff;
+}
+.s_shu{
+  margin-right: 10rpx;
+  padding: 10rpx 15rpx;
+}
+.jia{
+  border: 1rpx solid #ccc;
+  padding: 5rpx 20rpx;
+  margin-bottom: 20rpx;
+}
+.dizhi{
+  padding: 5rpx 15rpx;
+  margin: 20rpx 0;
+  font-size: 30rpx;
+  color: #333;
+  background: #fff;
+  display: flex;
+}
+.dizhi>view:nth-child(1){
+  margin-right: 15rpx;
+}
+.pingjia{
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  font-size: 25rpx;
+  padding: 10rpx 15rpx;
+}
+.siz{
+  font-size: 30rpx;
+  margin-right: 15rpx;
+}
+
+/* 评价选项卡 */
+.tab-h{
+    height: 80rpx;width: 100%; box-sizing: border-box;overflow: hidden;line-height: 80rpx;background: #F7F7F7; font-size: 30rpx; white-space: nowrap; }
+.tab-item{margin:0 36rpx;display: inline-block;}
+.tab-item.active{color: #e90000;position: relative;}
+.tab-item.active:after{ content: "";display: block;height: 8rpx;width: 52rpx;background: #e90000;position: absolute; bottom: 0;left: 5rpx;border-radius: 16rpx;}
+
+.tab-content{margin-top: 0rpx;}
+.scoll-h{height: auto;}
+
+.s_color{
+  background: pink;
+}
+.chakan{
+  background: #fff;
+  padding: 10rpx;
+}
+.quan{
+  width: 400rpx;
+  border: 1rpx solid #ccc;
+  font-size: 35rpx;
+  color: #ccc;
+  margin: auto;
+  margin-top:30rpx;
+  border-radius: 100px;
+  text-align: center;
+}
+.chakan>image{
+  display: block;
+  width: 95%;
+  height: 500rpx;
+  margin: 20rpx auto;
+  border: 1rpx solid #333;
+}
+/* footer */
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+  background: #fff;
+  border-top: 1rpx solid #999;
+  display: flex;
+}
+.footer>view{
+  text-align: center;
+  /* line-height: 100rpx; */
+  font-size: 30rpx;
+}
+.lianxi{
+  width: 23%;
+  height: 80rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  line-height: 80rpx;
+  color: #666;
+  border: 1rpx solid #666;
+  border-radius: 10rpx;
+}
+.gouwu{
+  width: 27%;
+  color: #fff;
+  line-height: 100rpx;
+}

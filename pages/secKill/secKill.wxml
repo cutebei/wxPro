@@ -1,0 +1,24 @@
+<!--pages/secKill/secKill.wxml-->
+
+      <view class='goodSale'>
+        <view wx:for="{{goodSales}}" class='goodBox' wx:key="index">
+          <view>
+               <image src="{{item.img}}" class='good_imgs'  style='flex:1;margin-left:30rpx;'/>
+          </view>
+          <view style='flex:1;'>
+              <view style='font-size:28rpx;margin:0 10rpx;'>
+               {{item.cont}}
+              </view>
+              <view style='font-size:24rpx;margin:15rpx 10rpx;text-decoration:line-through;color:#cccccc;'>
+               ￥50.00
+              </view>
+              <text style='font-size:30rpx;margin-left:10rpx;color:red'>￥{{item.cheap}}</text>
+              <view class="ktbtn">
+                  立即购买
+              </view>
+              <view class="ktSale">
+                已售{{item.naturl}}%
+              </view>
+          </view>
+        </view>
+      </view>

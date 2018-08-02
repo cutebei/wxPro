@@ -1,0 +1,154 @@
+/* pages/sellGroup/sellGroup.wxss */
+
+.swiper_box {
+  width: 100%;
+  border-bottom: 1px soild #e1e1e1;
+  
+}
+
+swiper-item image {
+  width: 100%;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.scroll {
+  float: left;
+  width: 100px;
+}
+
+.scroll_box {
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  white-space: nowrap;
+  border: 1px solid #e1e1e1;
+}
+
+.swiper-tab-list {
+  /* width: 160rpx; */
+  padding: 20rpx 20rpx;
+  height: auto;
+  font-size: 32rpx;
+  margin-right: 23rpx;
+  display: inline-block;
+}
+
+.on {
+  color: red;
+  border-bottom: 5rpx solid red;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+    background: #e7e7e7;
+}
+
+/* .swiper-box view{  
+  text-align: center;  
+} */
+
+.ptSpanTime {
+  display: inline-block;
+  padding: 0 15rpx;
+  color: red;
+  margin-left: 5rpx;
+  border: 1px solid #e1e1e1;
+  font-size: 24rpx;
+}
+
+.active_box {
+  /* margin-top: 15rpx; */
+  padding-top: 15rpx;
+  width: 100%;
+  background: #fff;
+  display: flex;
+}
+
+.active_title {
+  margin-left: 20rpx;
+  margin-bottom: 10rpx;
+  display: block;
+}
+.active_dl {
+  flex: 1;
+  width: 100%;
+  text-align: center;
+  /* border-bottom: 1px solid #ccc; */
+    padding-bottom: 20rpx;
+}
+
+.pt_box {
+  margin-top: 20rpx;
+  padding-bottom: 20rpx;
+  width: 80%;
+  margin: 0 auto;
+  background:#ffffff;
+}
+
+.pt_Sbox {
+  width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.active_imgs {
+  width: 150rpx;
+  height: 100rpx;
+}
+.good_imgs{
+  width: 180rpx;
+  height: 180rpx;
+}
+.active_img {
+  width: 300rpx;
+  height: 150rpx;
+}
+
+.active_span {
+  font-size: 28rpx;
+  color: #ccc;
+  float: right;
+  margin-right: 30rpx;
+}
+
+.ptCon {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.ptBox {
+  flex: 1;
+  text-align: left；;
+  background:#ffffff;
+}
+.goodSale{
+  /* margin-top:10rpx; */
+  width: 100%;
+  background: #ffffff;
+  /* height: 800rpx; */
+  margin-top:10rpx;
+  margin-bottom:20rpx;
+}
+.goodBox{
+  display: flex;
+  padding-bottom: 20rpx;
+  margin-top: 20rpx;
+  border-bottom: 1px solid #e1e1e1;
+  position: relative;
+}
+.ktbtn{
+  display:inline-block;
+  padding: 10rpx 40rpx;
+  background: red;
+  font-size: 26rpx;
+  color:#ffffff;
+  border-radius: 5px;
+  position: absolute;
+  right:30rpx;
+  top:125rpx;
+}

@@ -1,0 +1,30 @@
+/* pages/secKill/secKill.wxss */
+.goodBox{
+  display: flex;
+  padding-bottom: 20rpx;
+  padding-top: 20rpx;
+  position: relative;
+  background: #f8f8f8;
+  margin-bottom:20rpx;
+}
+.ktbtn{
+  display:inline-block;
+  padding: 10rpx 40rpx;
+  background: red;
+  font-size: 26rpx;
+  color:#ffffff;
+  border-radius: 5px;
+  position: absolute;
+  right:30rpx;
+  top:100rpx;
+}
+.ktSale{
+  font-size: 22rpx;
+  position: absolute;
+  right:120rpx;
+  top:160rpx;
+}
+.good_imgs{
+  width: 180rpx;
+  height: 180rpx;
+}

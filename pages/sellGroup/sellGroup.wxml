@@ -1,0 +1,134 @@
+<!--pages/sellGroup/sellGroup.wxml-->
+<!-- 选择栏 -->
+
+<view class="scroll_box">
+  <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
+    <view wx:for="{{topArr}}" wx:key="id" data-type="{{item.id}}" class="swiper-tab-list {{currentTab==item.id ? 'on' : ''}}" data-current="{{item.id}}" bindtap="swichNav">{{item.name}}</view>
+  </scroll-view>
+</view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 45}}px" bindchange="bindChange">
+  <!-- 我是今日精选 -->
+  <swiper-item  style="overflow:scroll">
+    <view>
+      <swiper class="swiper_box" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+        <block wx:for="{{imgUrls}}" wx:key="index">
+          <swiper-item>
+            <image src="{{item.picurl}}" class="slide-image" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <!-- 今日比拼 -->
+    <text style='border-top:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;display:block;padding-bottom:30rpx;font-size:32rpx;padding-left:20rpx;background:#ffffff;'>
+     今日<text style='color:red'>必拼</text>
+    <text style='color:#999999;margin-left:10rpx;font-size:28rpx;'>距离本场结束</text>
+    <text class='ptSpanTime' style='margin-left:15rpx;'>{{ptHour}}</text>
+    <text class='ptSpanTime'>{{ptMin}}</text>
+    <text class='ptSpanTime'>{{ptSec}}</text>
+    <text style='color:#999999;float:right;margin-top:10rpx;margin-right:30rpx;font-size:24rpx;'>更多查看</text>
+    </text>
+
+    <!-- 9.9拼团-->
+    <view class='active_box'>
+      <view class='active_dl' wx:key="index" wx:for="{{ptArr}}">
+        <dl class="pt_box">
+          <dt style="display:block">
+            <image src="{{item.img}}" class='active_img' />
+          </dt>
+          <dd>
+            <text style='font-size:20rpx;padding:0 5rpx;border:1rpx solid #e1e1e1;display:inline-block;border-radius:4px;float:left;margin-left:35rpx;margin-top:10rpx;'>{{item.num}}人拼</text>
+            <text style='color:#cccccc; text-decoration:line-through;font-size:28rpx;'>￥{{item.naturl}}</text>
+            <text style='color:red;font-weight:800;float:right;margin-right:45rpx;font-size:28rpx;margin-top:10rpx;'>￥{{item.cheap}}</text>
+          </dd>
+        </dl>
+      </view>
+    </view>
+    <view class='ptCon'>
+      <!-- 9.9拼 -->
+      <view class='ptBox'>
+        <text style='color:red;font-size:32rpx;margin-left:20rpx;font-weight:800'>9.9</text>
+        <text style='font-size:32rpx;font-weight:800'>拼</text>
+        <view style="display:flex;margin-top:10rpx;">
+          <view class='active_dl' wx:key="index" wx:for="{{ptArr}}">
+            <dl class="pt_Sbox">
+              <dt style="display:block">
+                <image src="{{item.img}}" class='active_imgs' />
+              </dt>
+              <dd>
+                <view style='font-size:28rpx;'>
+                  {{item.name}}
+                </view>
+                <text style='font-size:20rpx;padding:0 5rpx;display:inline-block;border-radius:4px;float:left;margin-left:5rpx;margin-top:10rpx;color:red;'>{{item.num}}人拼</text>
+                <text style='color:red;font-weight:800;float:right;margin-right:25rpx;font-size:28rpx;margin-top:5rpx;'>￥{{item.cheap}}</text>
+              </dd>
+            </dl>
+          </view>
+        </view>
+
+      </view>
+      <!-- 品牌清仓 -->
+      <view class='ptBox'>
+        <text style='color:red;font-size:32rpx;margin-left:20rpx;font-weight:800'>品牌</text>
+        <text style='font-size:32rpx;font-weight:800'>清仓</text>
+        <view style="display:flex;margin-top:10rpx;">
+          <view class='active_dl' wx:key="index" wx:for="{{ptArr}}">
+            <dl class="pt_Sbox">
+              <dt style="display:block">
+                <image src="{{item.img}}" class='active_imgs' />
+              </dt>
+              <dd>
+                <view style='font-size:28rpx;'>
+                  {{item.name}}
+                </view>
+                <view style='font-size:24rpx;padding:0 5rpx;display:block;margin-top:10rpx;'>
+                  {{item.cont}}
+                </view>
+              </dd>
+            </dl>
+          </view>
+        </view>
+      </view>
+
+
+    </view>
+      <!-- 每日好货上新 -->
+      <view class='goodSale'>
+        <view style='text-align:center;font-size:32rpx;display:block;padding:20rpx 0;font-weight:800'>每日好货上新</view>
+        <view wx:for="{{goodSales}}" class='goodBox' wx:key="index">
+          <view>
+               <image src="{{item.img}}" class='good_imgs'  style='flex:1;margin-left:30rpx;'/>
+          </view>
+          <view style='flex:1;'>
+              <view style='font-size:28rpx;margin:0 10rpx;'>
+               {{item.cont}}
+              </view>
+              <view style='font-size:24rpx;margin:15rpx 10rpx;'>
+               已拼  <text>{{item.num}}</text> 件
+              </view>
+              <view style='font-size:24rpx;color:red;margin-left:10rpx'>
+              {{item.naturl}}人拼 <text style='font-size:30rpx;margin-left:10rpx;'>￥{{item.cheap}}</text>
+              </view>
+              <view class="ktbtn">
+                  去开团
+              </view>
+          </view>
+        </view>
+      </view>
+  </swiper-item>
+  <!-- 我是呵呵 -->
+  <swiper-item>
+    <view style='height:1000px;'>我是呵呵</view>
+  </swiper-item>
+  <!-- 我是嘿嘿 -->
+  <swiper-item>
+    <view>我是嘿嘿</view>
+  </swiper-item>
+  <swiper-item>
+    <view>我是嘿嘿</view>
+  </swiper-item>
+  <swiper-item>
+    <view>我是嘿嘿</view>
+  </swiper-item>
+</swiper>
+
+<!-- banner -->
