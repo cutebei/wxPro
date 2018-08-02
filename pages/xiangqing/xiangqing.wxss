@@ -109,8 +109,14 @@ swiper-item{
   color: #666;
   display: flex;
 }
-.wei>view{
+.wei{
   margin: 10rpx 10rpx;
+  padding: 0 30rpx;
+  background: #f9f9f9;
+  /* color: #fff; */
+}
+.on{
+    margin: 10rpx 10rpx;
   padding: 0 30rpx;
   background: #e90000;
   color: #fff;

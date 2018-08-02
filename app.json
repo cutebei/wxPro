@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/xiangqing/xiangqing",
     "pages/index/index",
     "pages/sellGroup/sellGroup",
     "pages/secKill/secKill",
-    "pages/xiangqing/xiangqing",
     "pages/success/success",
     "pages/payment/payment",
     "pages/order/order",

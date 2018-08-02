@@ -31,19 +31,19 @@
             <view class='xuan'>
               <text>已选</text>
               <text>【 {{ chanpin }} 】</text>
-              <text class='num'>{{shu}}个</text>
+              <text class='num'>{{chckNum}}个</text>
             </view>
             <view class='canpin'>
               <view style='color:#999;'>产品</view>
-              <view class='wei'>
-                <view wx:for='{{s_wei}}' bindtap="xuanze" data-cnvin="{{item.price}}" wx:key="index">【{{item.price}}】</view>
+              <view>
+                <view wx:for='{{s_wei}}' bindtap="xuanze" data-cnvin="{{item.price}}" wx:key="index" class="{{currentTab==item.price ? 'on' : 'wei'}}">【{{item.price}}】</view>
               </view>
             </view>
             <view class='s_num'>
               <view class='s_shu'>数量</view>
-              <view class='jia'>-</view>
-              <view class='jia'>1</view>
-              <view class='jia'>+</view>
+              <view class='jia' bindtap='subNum'>-</view>
+              <view class='jia'>{{chckNum}}</view>
+              <view class='jia' bindtap='addNum'>+</view>
             </view>
             <view class='dizhi'>
               <view>配送至</view>
@@ -104,8 +104,8 @@
   <!-- footer -->
   <view class='footer'>
     <view class='lianxi'>联系客服</view>
-    <view class='lianxi'>购物车</view>
-    <view class='gouwu' style='background:rgb(250, 139, 12);' bindtap="goOrder">加入购物车</view>
+    <view class='lianxi' bindtap="goOrder">购物车</view>
+    <view class='gouwu' style='background:rgb(250, 139, 12);' bindtap="addOrder">加入购物车</view>
     <view class='gouwu'style='background:#e90000;'>立即购买</view>
   </view>
 </view>

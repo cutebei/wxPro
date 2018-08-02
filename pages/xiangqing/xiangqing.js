@@ -21,7 +21,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    chanpin: "",//选择的产品
+    chanpin: "您还未选择商品",//选择的产品
     winHeight: "",//窗口高度
     currentTab: 0, //预设当前项的值
     scrollLeft: 0, //tab标题的滚动条位置
@@ -32,6 +32,9 @@ Page({
       answer: 134,
       listen: 2234
     }],
+    chckNum:0,//选择的商品数量
+    currentTab: 0,
+    inventory:10,//剩余库存
     plist: [],//存储选中购物车
     tabs: tabs, //展示的数据
     slideOffset: 0, //指示器每次移动的距离
@@ -56,7 +59,8 @@ Page({
 
     s_info: [{
       proice: '五谷营养五谷营养五谷营养五谷营养五谷营养五谷营养五谷营养',
-      money:'80'
+      money:'80',
+      id:1,
     }],
     s_wei:[
       {
@@ -78,19 +82,65 @@ Page({
     this.setData({
         chanpin: e.target.dataset.cnvin
     })
-  },
-  goOrder: function () { //跳转详情页
-    //   this.ing();
-    if (this.data.plist.length > 0 && this.data.total > 0) {
-      wx.navigateTo({
-        url: '../order/order?from=cart'
+    this.setData({
+      chckNum: 0
+    })
+    var that = this;
+    if (this.data.currentTab === e.target.dataset.cnvin) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.cnvin
       })
+    }
+  },
+  subNum:function(e){// 数量减少
+    if(this.data.chckNum>0){
+      this.setData({
+        chckNum: this.data.chckNum-1
+      })
+    }else{
+      this.setData({
+        chckNum:0
+      })
+    }
+  },
+  addNum:function (e) { //数量增加
+    if (this.data.chckNum < this.data.inventory) {
+      this.setData({
+        chckNum: this.data.chckNum + 1
+      })
+    } else {
+      return false;
+    }
+  },
+  addOrder:function(e){//添加购物车
+    app.cart.add({
+      // id: this.data.s_info[0].id,
+      // money: this.data.s_info[0].money,
+      price: this.data.s_info[0].proice,
+      num: this.data.chckNum
+    })
+    console.log(app.cart)
+    console.log(app.cart.getNum())
+    if (this.data.plist.length > 0 && this.data.chckNum > 0) {
+      console.log(app.cart)
+
+
+      // wx.switchTab({
+      //   url: '../cart/cart'
+      // })
     } else {
       app.modal({
         title: '购物车无商品',
         showCancel: false
       })
     }
+  },
+  goOrder: function () { //跳转购物车
+    wx.switchTab({
+      url: '../cart/cart'
+    })
   },
   // 滚动切换标签样式
   switchTab: function (e) {

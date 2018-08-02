@@ -81,7 +81,8 @@ App({
         },
         getNum: function () {
             var n = 0;
-            var dic = wx.getStorageSync(this.key) || {}
+            var dic = wx.getStorageSync(this.key) || {};
+            console.log(dic)
             for (var i in dic) {
                 n += dic[i].num;
             }
