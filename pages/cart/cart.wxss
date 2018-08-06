@@ -34,7 +34,6 @@ page {
   position: relative;
   overflow-x: hidden;
 }
-
 .del {
   position: absolute;
   right: 0;

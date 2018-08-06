@@ -4,23 +4,28 @@ Page({
     data: {
         plist: [],
         total: 0,
-        his: ""
+        his: "",
+        totalGood:[],
+        delBtnWidth: 180//删除按钮宽度单位（rpx）
     },
     onLoad: function (e) {
-
+      this.initEleWidth();
     },
     onShow: function (e) {
-        if (base.cart.ref) {
-            this.setData({ his: base.cart.ref });
-            base.cart.ref = "";
-        }
-        var l = base.cart.getList();
-        for (var i = 0; i < l.length; i++) {
-            l[i].img = base.path.res + 'images/ksk/item/w_127/' + l[i].name + '.jpg';
-            l[i].index = i;
-        }
-        this.setData({ plist: l });
-        this.changeTotal();
+      this.setData({
+        totalGood: wx.getStorageSync("shopCart")
+      })
+      //   if (base.cart.ref) {
+      //       this.setData({ his: base.cart.ref });
+      //       base.cart.ref = "";
+      //   }
+      //   var l = base.cart.getList();
+      //   for (var i = 0; i < l.length; i++) {
+      //       l[i].img = base.path.res + 'images/ksk/item/w_127/' + l[i].name + '.jpg';
+      //       l[i].index = i;
+      //   }
+      // this.setData({ totalGood: l });
+      //   this.changeTotal();
     },
     goBack: function () {
         var _this = this;
@@ -32,11 +37,11 @@ Page({
         preview.show(e.currentTarget.dataset.name,e.currentTarget.dataset.brand,e.currentTarget.dataset.index)
     },
     changeTotal: function () {
-        var l = this.data.plist;
+      var l = this.data.totalGood;
         var t = 0;
         for (var i = 0; i < l.length; i++) {
             if (!l[i].del) {//排除删除选项
-                t += l[i].price * l[i].num;
+                t += l[i].money * l[i].num;
             }
         }
         this.setData({ total: t });
@@ -44,18 +49,18 @@ Page({
     changeNum: function (e) {
         var t = e.currentTarget.dataset.type;
         var index = e.currentTarget.dataset.index;
-        var re = this.data.plist[index].num + parseInt(t);
+      var re = this.data.totalGood[index].num + parseInt(t);
         if (re < 100 && re > 0) {
-            var key = "plist[" + index + "].num";
+          var key = "totalGood[" + index + "].num";
             var obj = {}; obj[key] = re;
             this.setData(obj);
             this.changeTotal();
-            base.cart.num(this.data.plist[index].supplyno, obj[key]);
+          base.cart.num(this.data.totalGood[index].supplyno, obj[key]);
         }
     },
     del: function (e) {
         var index = e.currentTarget.dataset.index;
-        var sno = this.data.plist[index].supplyno;
+      var sno = this.data.totalGood[index].supplyno;
         //var l = this.data.plist;
         // var _l = [];
         //var obj = { total: 0 };
@@ -66,7 +71,7 @@ Page({
         //     }
         // }
 
-        var key1 = "plist[" + index + "].del";
+      var key1 = "totalGood[" + index + "].del";
         var obj = {};
         obj[key1] = true;
 
@@ -84,6 +89,7 @@ Page({
 
 
 
+
         this.changeTotal();
         base.cart.remove(sno);
     },
@@ -94,8 +100,13 @@ Page({
             base.modal({
                 title: "确认清空所有商品？", confirmText: "清空", success: function (res) {
                     if (res.confirm) {
-                        _this.setData({ plist: [], total: 0 });
-                        base.cart.clear();
+                      _this.setData({ totalGood: [], total: 0 });
+                        // base.cart.clear();
+                        wx.removeStorage({
+                          key: 'shopCart',
+                          success: function(res) {},
+                        })
+
                     }
                 }
             })
@@ -103,7 +114,7 @@ Page({
     },
     goOrder: function () {
      //   this.ing();
-        if (this.data.plist.length > 0 && this.data.total > 0) {
+      if (this.data.totalGood.length > 0 && this.data.total > 0) {
             wx.navigateTo({
                 url: '../order/order?from=cart'
             })
@@ -201,50 +212,124 @@ Page({
             timingFunction: 'ease-out'
         });
         var obj = {};
-        var key = "plist[" + index + "].ani";
+      var key = "totalGood[" + index + "].ani";
         obj[key] = this.p.ani.export();
         this.setData(obj);
     },
-    ptouchsatrt: function (e) {
-
-        var index = e.currentTarget.dataset.index;
-        if (this.p.currentIndex >= 0) {
-            this.moveTo(this.p.currentIndex, 0);
-            return;
-        }
-        if (this.p.eventStartOk) {
-            this.p.eventOk = true;
-            this.p.len = 0;
-            var pt = e.changedTouches[0];
-            pt.aaaaaaa = 11111;
-            this.p.x = pt.pageX;
-            this.p.y = pt.pageY;
-            console.log("start")
-        }
-    },
-    ptouchend: function (e) {
-        if (this.p.eventOk) {
-            var pt = e.changedTouches[0];
-            var len = pt.pageX - this.p.x;//预计目标位置
-            var ht = pt.pageY - this.p.y;
-            if (len != 0 && Math.abs(ht) / Math.abs(len) < 0.3) {//滑动倾斜度限制
-                this.p.len = len;
-                var index = e.currentTarget.dataset.index;
-                if (len > 0 - this.p.max / 2) {
-                    this.moveTo(index, 0);
-                } else {
-                    this.moveTo(index, 0 - this.p.max);
-                }
-            }
-        }
-        this.p.eventOk = false;
-        this.p.eventStartOk = false;
-        var _this = this;
-        if (this.p.tm) {
-            clearTimeout(this.p.tm);
-        }
-        this.p.tm = setTimeout(function () {
-            _this.p.eventStartOk = true;
-        }, 300);
+  touchS: function (e) {
+    if (e.touches.length == 1) {
+      this.setData({
+        //设置触摸起始点水平方向位置
+        startX: e.touches[0].clientX
+      });
     }
+  },
+  touchM: function (e) {
+    if (e.touches.length == 1) {
+      //手指移动时水平方向位置
+      var moveX = e.touches[0].clientX;
+      //手指起始点位置与移动期间的差值
+      var disX = this.data.startX - moveX;
+      var delBtnWidth = this.data.delBtnWidth;
+      var txtStyle = "";
+      if (disX == 0 || disX < 0) {//如果移动距离小于等于0，文本层位置不变
+        txtStyle = "left:0px";
+      } else if (disX > 0) {//移动距离大于0，文本层left值等于手指移动距离
+        txtStyle = "left:-" + disX + "px";
+        if (disX >= delBtnWidth) {
+          //控制手指移动距离最大值为删除按钮的宽度
+          txtStyle = "left:-" + delBtnWidth + "px";
+        }
+      }
+      //获取手指触摸的是哪一项
+      var index = e.target.dataset.index;
+      var totalGood = this.data.totalGood;
+      console.log(totalGood[index].txtStyle)
+      totalGood[index].txtStyle = txtStyle;
+      //更新列表的状态
+      this.setData({
+        totalGood: totalGood
+      });
+    }
+  },
+  getEleWidth: function (w) {
+    var real = 0;
+    try {
+      var res = wx.getSystemInfoSync().windowWidth;
+      var scale = (750 / 2) / (w / 2);//以宽度750px设计稿做宽度的自适应
+      // console.log(scale);
+      real = Math.floor(res / scale);
+      return real;
+    } catch (e) {
+      return false;
+      // Do something when catch error
+    }
+  },
+  initEleWidth: function () {
+    var delBtnWidth = this.getEleWidth(this.data.delBtnWidth);
+    this.setData({
+      delBtnWidth: delBtnWidth
+    });
+  },
+  touchE: function (e) {
+    if (e.changedTouches.length == 1) {
+      //手指移动结束后水平位置
+      var endX = e.changedTouches[0].clientX;
+      //触摸开始与结束，手指移动的距离
+      var disX = this.data.startX - endX;
+      var delBtnWidth = this.data.delBtnWidth;
+      //如果距离小于删除按钮的1/2，不显示删除按钮
+      var txtStyle = disX > delBtnWidth / 2 ? "left:-" + delBtnWidth + "px" : "left:0px";
+      //获取手指触摸的是哪一项
+      var index = e.target.dataset.index;
+      var totalGood = this.data.totalGood;
+      totalGood[index].txtStyle = txtStyle;
+      //更新列表的状态
+      this.setData({
+        totalGood: totalGood
+      });
+    }
+  },
+    // ptouchsatrt: function (e) {
+
+    //     var index = e.currentTarget.dataset.index;
+    //     if (this.p.currentIndex >= 0) {
+    //         this.moveTo(this.p.currentIndex, 0);
+    //         return;
+    //     }
+    //     if (this.p.eventStartOk) {
+    //         this.p.eventOk = true;
+    //         this.p.len = 0;
+    //         var pt = e.changedTouches[0];
+    //         pt.aaaaaaa = 11111;
+    //         this.p.x = pt.pageX;
+    //         this.p.y = pt.pageY;
+    //         console.log("start")
+    //     }
+    // },
+    // ptouchend: function (e) {
+    //     if (this.p.eventOk) {
+    //         var pt = e.changedTouches[0];
+    //         var len = pt.pageX - this.p.x;//预计目标位置
+    //         var ht = pt.pageY - this.p.y;
+    //         if (len != 0 && Math.abs(ht) / Math.abs(len) < 0.3) {//滑动倾斜度限制
+    //             this.p.len = len;
+    //             var index = e.currentTarget.dataset.index;
+    //             if (len > 0 - this.p.max / 2) {
+    //                 this.moveTo(index, 0);
+    //             } else {
+    //                 this.moveTo(index, 0 - this.p.max);
+    //             }
+    //         }
+    //     }
+    //     this.p.eventOk = false;
+    //     this.p.eventStartOk = false;
+    //     var _this = this;
+    //     if (this.p.tm) {
+    //         clearTimeout(this.p.tm);
+    //     }
+    //     this.p.tm = setTimeout(function () {
+    //         _this.p.eventStartOk = true;
+    //     }, 300);
+    // }
 });

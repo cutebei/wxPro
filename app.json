@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/cart/cart",
     "pages/xiangqing/xiangqing",
-    "pages/index/index",
-    "pages/sellGroup/sellGroup",
     "pages/secKill/secKill",
+    "pages/sellGroup/sellGroup",
     "pages/success/success",
     "pages/payment/payment",
     "pages/order/order",
@@ -20,7 +20,8 @@
     "pages/user/myorderdetals/myorderdetals",
     "pages/user/myaddress/myaddress",
     "pages/user/mycoupons/mycoupons",
-    "pages/user/editaddress/editaddress"
+    "pages/user/editaddress/editaddress",
+    "pages/goGroup/goGroup"
   ],
   "window": {
     "backgroundTextStyle": "dark",

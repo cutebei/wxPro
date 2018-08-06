@@ -6,7 +6,11 @@
 <!-- banner -->
 <!-- 轮播-->
 <view style='position:relative'>
-  <input placeholder="请输入关键字" class='searchIpu'></input>
+<view class='searchIpu'>
+  <input placeholder="请输入关键字"></input>
+  <image src='../../icon/search.png' class='searchImg'></image>
+</view>
+
   <swiper class="swiper_box" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
     <block wx:for="{{imgUrls}}" wx:key="index">
       <swiper-item>
@@ -33,7 +37,7 @@
 <view class='active_box'>
   <view class='active_title'>xxx拼团<view class='active_span' bindtap='goToptPage'>大家都在拼</view></view>
   <view class='active_dl' style='margin-bottom:10rpx;'>
-    <dl wx:for="{{ptArr}}" class="pt_box" wx:key="index">
+    <dl wx:for="{{ptArr}}" class="pt_box" wx:key="index" bindtap='goToptPage'>
       <dt style="display:block">
         <image src="{{item.img}}" class='active_img' />
       </dt>
@@ -72,7 +76,7 @@
 </view>
 <!-- 种草-->
 <view class='s_box'>
-  <view class='s_tit' style='font-size:36rpx;'>XXX 种草</view>
+  <view class='s_tit' style='font-size:36rpx;'>xxx种草</view>
   <view class='s_con'>
     <view class='s_cons' wx:for='{{s_info}}'  wx:key="index" bindtap='s_rou'>
       <image src='{{item.src}}'></image>

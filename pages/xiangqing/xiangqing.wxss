@@ -71,6 +71,9 @@ swiper-item{
   border-bottom: 1rpx solid #999;
   background: #fff;
 }
+.slide-image{
+  display: block;
+}
 .s_swiper>.swiper {
   height: 400rpx;
   width: 100%;

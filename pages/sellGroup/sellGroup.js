@@ -152,6 +152,12 @@ Page({
       })
     }
   },
+  goGroup: function (e) {
+    console.log(111)
+    wx.navigateTo({
+      url: "../goGroup/goGroup"
+    })
+  },
   /** 
    * 点击分享 
    */

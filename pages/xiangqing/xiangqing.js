@@ -34,6 +34,7 @@ Page({
     }],
     chckNum:0,//选择的商品数量
     currentTab: 0,
+    cartNum:0,//购物车数量
     inventory:10,//剩余库存
     plist: [],//存储选中购物车
     tabs: tabs, //展示的数据
@@ -41,7 +42,15 @@ Page({
     activeIndex: 0, //当前展示的Tab项索引
     sliderWidth: 96, //指示器的宽度,计算得到
     contentHeight: 0, //页面除去头部Tabbar后，内容区的总高度，计算得到
-    movies: [{
+    shu: '？',
+    dizhi:'xxxxxx',
+
+    s_info: {
+      title: '五谷营养五谷营养五谷营养五谷营养五谷营养五谷营养五谷营养',
+      money:'80',
+      id:1,
+      style:"",
+      movies: [{
         url: 'http://img04.tooopen.com/images/20130712/tooopen_17270713.jpg'
       },
       {
@@ -53,15 +62,8 @@ Page({
       {
         url: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
       }
-    ],
-    shu: '？',
-    dizhi:'xxxxxx',
-
-    s_info: [{
-      proice: '五谷营养五谷营养五谷营养五谷营养五谷营养五谷营养五谷营养',
-      money:'80',
-      id:1,
-    }],
+      ],
+    },
     s_wei:[
       {
       price:'xxxxx 4378g  原味1'
@@ -115,27 +117,40 @@ Page({
     }
   },
   addOrder:function(e){//添加购物车
-    app.cart.add({
-      // id: this.data.s_info[0].id,
-      // money: this.data.s_info[0].money,
-      price: this.data.s_info[0].proice,
-      num: this.data.chckNum
-    })
-    console.log(app.cart)
-    console.log(app.cart.getNum())
-    if (this.data.plist.length > 0 && this.data.chckNum > 0) {
-      console.log(app.cart)
-
-
-      // wx.switchTab({
-      //   url: '../cart/cart'
-      // })
-    } else {
-      app.modal({
-        title: '购物车无商品',
+    if (this.data.chanpin =="您还未选择商品"){
+        app.modal({
+          title: '您还未选择商品',
         showCancel: false
       })
+      return false;
     }
+    if (this.data.chckNum == 0) {
+      app.modal({
+        title: '请选择商品数量',
+        showCancel: false
+      })
+      return false;
+    }
+    var shopCart = wx.getStorageSync("shopCart");
+    if (!shopCart){  //没有缓存的时候
+      var shopCart=[];
+    }
+    shopCart.push(e.target.dataset);
+    wx.setStorage({  //存储到storage
+      key: 'shopCart',
+      data: shopCart,
+    })
+    this.setData({
+      cartNum: shopCart.length
+    });
+    // if (this.data.plist.length > 0 && this.data.chckNum > 0) {
+    //   app.modal({
+    //     title: '购物车无商品',
+    //     showCancel: false
+    //   })
+    // } else {
+    
+    // }
   },
   goOrder: function () { //跳转购物车
     wx.switchTab({
@@ -192,6 +207,11 @@ Page({
           winHeight: calc
         }); 
       }
+    });
+    //初始化获取购物车数量
+    var shopCart = wx.getStorageSync("shopCart");
+    this.setData({
+      cartNum: shopCart.length
     });
   },
   footerTap: app.footerTap,

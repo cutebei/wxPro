@@ -17,16 +17,16 @@
             <!-- 轮播 -->
             <view class='s_swiper'>
               <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
-                <block wx:for="{{movies}}" wx:for-index="index" wx:key="index">
+                <block wx:for="{{s_info.movies}}" wx:for-index="index" wx:key="index">
                   <swiper-item>
                     <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
                   </swiper-item>
                 </block>
               </swiper>
             </view>
-            <view class='jianjie' wx:for='{{s_info}}' wx:key="index">
-              <view class='jie'>{{item.proice}}</view>
-              <view class='stor'>￥{{item.money}}</view>
+            <view class='jianjie' wx:key="index">
+              <view class='jie'>{{s_info.title}}</view>
+              <view class='stor'>￥{{s_info.money}}</view>
             </view>
             <view class='xuan'>
               <text>已选</text>
@@ -53,7 +53,7 @@
               <view>
                 <text class='siz'>评价</text>
                 <text>好评98%</text>
-              </view>
+              </view> 
               <view>
                 <text>共8.6万+评论</text>
               </view>
@@ -104,8 +104,8 @@
   <!-- footer -->
   <view class='footer'>
     <view class='lianxi'>联系客服</view>
-    <view class='lianxi' bindtap="goOrder">购物车</view>
-    <view class='gouwu' style='background:rgb(250, 139, 12);' bindtap="addOrder">加入购物车</view>
+    <view class='lianxi' bindtap="goOrder" style='position:relative'><image src='../../icon/cartShop.png' style='width:60rpx;height:60rpx;margin-top:10rpx;margin-left:-35rpx;'></image><text style='color:#e90000;position:absolute;top:0;'>({{cartNum}})</text></view>
+    <view class='gouwu' style='background:rgb(250, 139, 12);' bindtap="addOrder" data-id="{{s_info.id}}" data-img="{{s_info.movies[0]}}" data-title="{{s_info.title}}" data-cartNum="{{cartNum}}" data-style="{{s_info.style}}" data-money="{{s_info.money}}" data-num="{{chckNum}}" data-list="{{chanpin}}">加入购物车</view>
     <view class='gouwu'style='background:#e90000;'>立即购买</view>
   </view>
 </view>

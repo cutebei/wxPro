@@ -106,9 +106,9 @@
                已拼  <text>{{item.num}}</text> 件
               </view>
               <view style='font-size:24rpx;color:red;margin-left:10rpx'>
-              {{item.naturl}}人拼 <text style='font-size:30rpx;margin-left:10rpx;'>￥{{item.cheap}}</text>
+              {{item.naturl}}人拼 <view style='font-size:30rpx;margin-left:10rpx;'>￥{{item.cheap}}</view>
               </view>
-              <view class="ktbtn">
+              <view class="ktbtn"  bindtap='goGroup'>
                   去开团
               </view>
           </view>
